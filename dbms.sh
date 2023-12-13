@@ -77,6 +77,8 @@ while true; do
         esac
     done
 
+# ###############################################################################################
+
     # Submenu for connected database
     while [ -n "$currentDb" ]; do
         PS3="Choose an option: "
