@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Directory to store databases
-
 DATABASE_DIR="/home/$(whoami)/Databases/"
 
 if [ ! -d "$DATABASE_DIR" ]; then
@@ -17,8 +16,8 @@ createDatabase() {
     echo "createDatabase function is called."
 }
 
-listDatabases() {
-    echo "listDatabases function is called."
+listDatabase() {
+    echo "listDatabase function is called."
 }
 
 connectToDatabase() {
@@ -33,8 +32,8 @@ createTable() {
     echo "createTable function is called."
 }
 
-listTables() {
-    echo "listTables function is called."
+listTable() {
+    echo "listTable function is called."
 }
 
 dropTable() {
@@ -62,15 +61,15 @@ updateTable() {
 # Main Menu
 while true; do
     PS3="Choose an option: "
-    options=("Create Database" "List Databases" "Connect To Database" "Drop Database" "Quit")
+    options=("Create Database" "List Database" "Connect To Database" "Drop Database" "Quit")
     select opt in "${options[@]}"; do
         case $opt in
             "Create Database")
                 createDatabase
                 break
                 ;;
-            "List Databases")
-                listDatabases
+            "List Database")
+                listDatabase
                 break
                 ;;
             "Connect To Database")
@@ -96,15 +95,15 @@ while true; do
     # Submenu for connected database
     while [ -n "$currentDb" ]; do
         PS3="Choose an option: "
-        options=("Create Table" "List Tables" "Drop Table" "Insert Into Table" "Select From Table" "Delete From Table" "Update Table" "Quit")
+        options=("Create Table" "List Table" "Drop Table" "Insert Into Table" "Select From Table" "Delete From Table" "Update Table" "Quit")
         select opt in "${options[@]}"; do
             case $opt in
                 "Create Table")
                     createTable
                     break
                     ;;
-                "List Tables")
-                    listTables
+                "List Table")
+                    listTable
                     break
                     ;;
                 "Drop Table")
