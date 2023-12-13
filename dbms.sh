@@ -1,7 +1,13 @@
 #!/bin/bash
 
 # Directory to store databases
+
 DATABASE_DIR="/home/$(whoami)/Databases/"
+
+if [ ! -d "$DATABASE_DIR" ]; then
+    mkdir -p "$DATABASE_DIR"
+    echo "Directory $DATABASE_DIR created for Databases."
+fi
 
 # ###############################################################################################
 
