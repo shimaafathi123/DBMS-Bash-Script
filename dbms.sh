@@ -11,7 +11,7 @@ fi
 
 # ###############################################################################################
 
-#functions of the DBMS
+# Functions of the DBMS
 
 createDatabase() {
     echo "createDatabase function is called."
@@ -47,6 +47,14 @@ insertIntoTable() {
 
 selectFromTable() {
     echo "selectFromTable function is called."
+}
+
+deleteFromTable() {
+    echo "deleteFromTable function is called."
+}
+
+updateTable() {
+    echo "updateTable function is called."
 }
 
 # ###############################################################################################
@@ -88,7 +96,7 @@ while true; do
     # Submenu for connected database
     while [ -n "$currentDb" ]; do
         PS3="Choose an option: "
-        options=("Create Table" "List Tables" "Drop Table" "Insert Into Table" "Select From Table" "Quit")
+        options=("Create Table" "List Tables" "Drop Table" "Insert Into Table" "Select From Table" "Delete From Table" "Update Table" "Quit")
         select opt in "${options[@]}"; do
             case $opt in
                 "Create Table")
@@ -109,6 +117,14 @@ while true; do
                     ;;
                 "Select From Table")
                     selectFromTable
+                    break
+                    ;;
+                "Delete From Table")
+                    deleteFromTable
+                    break
+                    ;;
+                "Update Table")
+                    updateTable
                     break
                     ;;
                 "Quit")
