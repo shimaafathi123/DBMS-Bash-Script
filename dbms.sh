@@ -3,11 +3,6 @@
 # Directory to store databases
 DATABASE_DIR=$(dirname "$(realpath "$0")")
 
-if [ ! -d "$DATABASE_DIR" ]; then
-    mkdir -p "$DATABASE_DIR"
-    echo "Directory $DATABASE_DIR created for Databases."
-fi
-
 # ###############################################################################################
 
 # Functions of the DBMS
