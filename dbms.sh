@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory to store databases
-DATABASE_DIR="/home/$(whoami)/Databases/"
+DATABASE_DIR=$(dirname "$(realpath "$0")")
 
 if [ ! -d "$DATABASE_DIR" ]; then
     mkdir -p "$DATABASE_DIR"
