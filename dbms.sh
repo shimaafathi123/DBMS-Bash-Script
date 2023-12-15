@@ -70,6 +70,12 @@ function dropDatabase() {
 function createTable() {
     echo "createTable function is called."
     
+    if [ -z "$currentDb" ]
+    then
+        echo "No database selected. Please connect to a database first."
+        return
+    fi
+    
     echo -n "Enter the table name: "
     read tableName
 
@@ -87,9 +93,11 @@ function createTable() {
         return
     fi
 
-    if [ -e "$DATABASE_DIR/$tableName" ]
+    tablePath="$currentDb/$tableName"
+
+    if [ -e "$tablePath" ]
     then
-        echo "Table '$tableName' already exists. Do you want to overwrite it? (y/n): "
+        echo "Table '$tableName' already exists in the current database. Do you want to overwrite it? (y/n): "
         read -r overwrite
         if [ "$overwrite" != "y" ]; then
             echo "Table creation canceled."
@@ -112,10 +120,10 @@ function createTable() {
         return
     fi
 
-    touch "$DATABASE_DIR/$tableName"
-    echo "$columns" > "$DATABASE_DIR/$tableName"
-    echo "Table '$tableName' created successfully."
-}  # End createTable function.
+    touch "$tablePath"
+    echo "$columns" > "$tablePath"
+    echo "Table '$tableName' created successfully in the current database."
+} # End createTable function.
 
 
 
