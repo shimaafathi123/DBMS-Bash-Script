@@ -103,6 +103,14 @@ function createTable() {
         echo "Column names cannot be empty. Aborting table creation."
         return
     fi
+uniqueColumns=$(echo "$columns" | tr ',' '\n' | sort -u | tr '\n' ',' | sed 's/,$//')
+
+    if [ "$columns" != "$uniqueColumns" ]
+    then
+        echo "Error: Duplicate column names found. Aborting table creation."
+        return
+    fi
+
     touch "$tableName"
     echo "$columns" > "$tableName"
     echo "Table '$tableName' created successfully."
