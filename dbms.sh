@@ -122,7 +122,19 @@ uniqueColumns=$(echo "$columns" | tr ',' '\n' | sort -u | tr '\n' ',' | sed 's/,
 # Function to list all tables in the current database
 function listTable() {
     echo "listTable function is called."
-}
+    echo "Tables in the current database:"
+    
+    if [ -z "$(sudo ls -A *)" ]
+    then
+        echo "No tables found in the current database."
+        return
+    fi
+    
+    for table in *
+    do
+        echo "- ${table}"
+    done
+} # End listTable function.
 
 # Function to drop a table
 function dropTable() {
