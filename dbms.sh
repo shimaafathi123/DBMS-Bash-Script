@@ -70,22 +70,9 @@ function dropDatabase() {
 # Function to create a new table
 function createTable() {
     echo "createTable function is called."
-    echo -n "Enter the table name: "
-    read tableName
-
-    if [ -z "$tableName" ]
-    then
-        echo "Table name cannot be empty. Aborting table creation."
-        return
-    fi
+    echo "Table name will be set as 'file'."
     
-    if echo "$tableName" | grep -qE '^[a-zA-Z0-9_]+$'
-    then
-        echo "Valid table name."
-    else
-        echo "Invalid characters in the table name. Please use only alphanumeric characters and underscores."
-        return
-    fi
+    tableName="file"
 
     if [ -e "$DATABASE_DIR/$tableName" ]
     then
@@ -113,7 +100,7 @@ function createTable() {
     fi
 
     touch "$DATABASE_DIR/$tableName"
-    echo "$columns" > "$tableName"
+    echo "$columns" > "$DATABASE_DIR/$tableName"
     echo "Table '$tableName' created successfully."
 }  # End createTable function.
 
