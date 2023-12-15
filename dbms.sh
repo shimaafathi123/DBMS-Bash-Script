@@ -87,7 +87,7 @@ function createTable() {
         return
     fi
 
-    if [ -e "$tableName" ]
+    if [ -e "$DATABASE_DIR/$tableName" ]
     then
         echo "Table '$tableName' already exists. Do you want to overwrite it? (y/n): "
         read -r overwrite
@@ -99,11 +99,12 @@ function createTable() {
 
     echo -n "Enter column names (comma-separated): "
     read columns
-    if [ -z "$columns" ]; then
+    if [ -z "$columns" ]
+    then
         echo "Column names cannot be empty. Aborting table creation."
         return
     fi
-uniqueColumns=$(echo "$columns" | tr ',' '\n' | sort -u | tr '\n' ',' | sed 's/,$//')
+    uniqueColumns=$(echo "$columns" | tr ',' '\n' | sort -u | tr '\n' ',' | sed 's/,$//')
 
     if [ "$columns" != "$uniqueColumns" ]
     then
@@ -111,10 +112,11 @@ uniqueColumns=$(echo "$columns" | tr ',' '\n' | sort -u | tr '\n' ',' | sed 's/,
         return
     fi
 
-    touch "$tableName"
-    echo "$columns" > "$tableName"
+    touch "$DATABASE_DIR/$tableName"
+    echo "$columns" > "$DATABASE_DIR/$tableName"
     echo "Table '$tableName' created successfully."
 }  # End createTable function.
+
 
 
 
@@ -122,6 +124,8 @@ uniqueColumns=$(echo "$columns" | tr ',' '\n' | sort -u | tr '\n' ',' | sed 's/,
 # Function to list all tables in the current database
 function listTable() {
     echo "listTable function is called."
+    DATABASE_DIR="$SCRIPT_DIR/databases"
+    cd "$DATABASE_DIR" || { echo "Error: Could not change to the database directory."; return; }
     echo "Tables in the current database:"
     
     if [ -z "$(sudo ls -A *)" ]
