@@ -113,7 +113,7 @@ function createTable() {
     fi
 
     touch "$DATABASE_DIR/$tableName"
-    echo "$columns" > "$DATABASE_DIR/$tableName"
+    echo "$columns" > "$tableName"
     echo "Table '$tableName' created successfully."
 }  # End createTable function.
 
