@@ -152,7 +152,39 @@ function listTable() {
 # Function to drop a table
 function dropTable() {
     echo "dropTable function is called."
-}
+    
+    if [ -z "$currentDb" ]
+    then
+        echo "No database selected. Please connect to a database first."
+        return
+    fi
+
+    echo -n "Enter the table name to drop: "
+    read tableName
+
+    if [ -z "$tableName" ]
+    then
+        echo "Table name cannot be empty. Aborting table deletion."
+        return
+    fi
+
+    tablePath="$currentDb/$tableName"
+
+    if [ -e "$tablePath" ]
+    then
+        echo "Are you sure you want to drop the table '$tableName' in the current database? (y/n): "
+        read -r confirmation
+        if [ "$confirmation" == "y" ]; then
+            rm "$tablePath"
+            echo "Table '$tableName' dropped successfully."
+        else
+            echo "Table deletion canceled."
+        fi
+    else
+        echo "Table '$tableName' not found in the current database."
+    fi
+} #End drop table function
+
 
 # Function to insert into a table
 function insertIntoTable() {
